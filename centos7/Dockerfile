@@ -85,14 +85,15 @@ RUN \
         unzip \
         valgrind-devel \
         which \
+        libcap-devel \
     && cd /tmp \
     && if [ -n "${ONLOAD_PACKAGE_URL}" ] ; then \
-          curl -fSL "${ONLOAD_PACKAGE_URL}" -o /tmp/onload-${ONLOAD_VERSION}-package.zip \
+          curl --insecure -fSL "${ONLOAD_PACKAGE_URL}" -o /tmp/onload-${ONLOAD_VERSION}-package.zip \
           && unzip /tmp/onload-${ONLOAD_VERSION}-package.zip \
           && echo "${ONLOAD_MD5SUM} onload-${ONLOAD_VERSION}.tgz" | md5sum --check \
           && tar -zxf onload-${ONLOAD_VERSION}.tgz ; \
     else \
-          curl -fSL "${ONLOAD_LEGACY_URL}" -o /tmp/onload-${ONLOAD_VERSION}.tgz \
+          curl --insecure -fSL "${ONLOAD_LEGACY_URL}" -o /tmp/onload-${ONLOAD_VERSION}.tgz \
           && echo "${ONLOAD_MD5SUM} onload-${ONLOAD_VERSION}.tgz" | md5sum --check \
           && tar -zxf onload-${ONLOAD_VERSION}.tgz \
           && mv openonload-${ONLOAD_VERSION} onload-${ONLOAD_VERSION}; \
@@ -118,7 +119,7 @@ RUN \
 
 
 # Labels for introspection
-LABEL maintainer="Evan Wies <evan@neomantra.net>"
+LABEL maintainer="Lucera Operations <devops@lucera.com>"
 LABEL ONLOAD_CENTOS_BASE="${ONLOAD_CENTOS_BASE}"
 LABEL ONLOAD_CENTOS_TAG="${ONLOAD_CENTOS_TAG}"
 LABEL ONLOAD_PACKAGE_URL="${ONLOAD_PACKAGE_URL}"
@@ -128,3 +129,7 @@ LABEL ONLOAD_MD5SUM="${ONLOAD_MD5SUM}"
 LABEL ONLOAD_WITHZF="${ONLOAD_WITHZF}"
 LABEL ONLOAD_DISABLE_SYSCALL_HOOK="${ONLOAD_DISABLE_SYSCALL_HOOK}"
 LABEL ONLOAD_USERSPACE_ID="${ONLOAD_USERSPACE_ID}"
+
+# Create a folder for core dumps
+RUN mkdir -p /var/crash/
+VOLUME /var/crash/
