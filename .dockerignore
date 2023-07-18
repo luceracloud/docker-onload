@@ -6,3 +6,5 @@
 .gitlab-ci.yml
 onload-gitlab-ci.yml
 flavors-to-build.txt
+
+*.zip
