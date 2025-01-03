@@ -87,6 +87,7 @@ RUN \
         util-linux \
         valgrind \
         wget \
+        libcap-dev \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10 \
     && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10 \
     && update-alternatives --install /usr/bin/cc cc /usr/bin/gcc 30 \
