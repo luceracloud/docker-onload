@@ -87,6 +87,7 @@ RUN \
         util-linux \
         valgrind \
         wget \
+        libcap-dev \
     && cd /tmp \
     && if [ -n "${ONLOAD_PACKAGE_URL}" ] ; then \
           curl --insecure -fSL "${ONLOAD_PACKAGE_URL}" -o /tmp/onload-${ONLOAD_VERSION}-package.zip \
