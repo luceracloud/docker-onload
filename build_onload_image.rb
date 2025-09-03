@@ -5,8 +5,8 @@
 require 'getoptlong'
 
 $ONLOAD_VERSIONS = {
-    '8.1.3.40'   => { :version => '8.1.3.40',   :md5sum => '2cf23e45999e4c411c32ea13e91bcc49', :driverid => 'tbc', :package_url => 'https://www.amd.com/content/dam/amd/en/support/downloads/solarflare/onload/openonload/8-1-3-40/SF-109585-LS-44-OpenOnload-Release-Package.zip' },
-    '8.0.2.51'   => { :version => '8.0.2.51',   :md5sum => '6d13cfd3d68ad4f6b1f41fcb624f85cd', :driverid => '89ed1273b4d369806a6a03b8f3697c17', :package_url => 'https://www.xilinx.com/content/dam/xilinx/publications/solarflare/onload/openonload/8_0_2_51/SF-109585-LS-40-OpenOnload-Release-Package.zip' },
+    '8.1.3.40'   => { :version => '8.1.3.40',   :md5sum => '2cf23e45999e4c411c32ea13e91bcc49', :driverid => 'tbc', :package_url => 'https://dl.lucera.com/public/content/raw/files/SF-109585-LS-44-OpenOnload-Release-Package.zip' },
+    '8.0.2.51'   => { :version => '8.0.2.51',   :md5sum => '6d13cfd3d68ad4f6b1f41fcb624f85cd', :driverid => '89ed1273b4d369806a6a03b8f3697c17', :package_url => 'https://dl.lucera.com/public/content/raw/files/SF-109585-LS-40-OpenOnload-Release-Package.zip' },
 }
 $ONLOAD_VERSIONS['latest'] = $ONLOAD_VERSIONS['8.1.3.40'].dup
 
