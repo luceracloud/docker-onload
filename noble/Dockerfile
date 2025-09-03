@@ -1,6 +1,6 @@
-# Dockerfile - Ubuntu Focal Fossa
+# Dockerfile - Ubuntu Noble Numbat
 #
-# Installs Solarflare's OpenOnload into Ubuntu Focal.
+# Installs Solarflare's OpenOnload into Ubuntu Noble.
 #
 # OpenOnload web page:
 #    https://www.openonload.org/
@@ -16,12 +16,12 @@
 #
 
 ARG ONLOAD_DEBIAN_BASE="ubuntu"
-ARG ONLOAD_DEBIAN_TAG="focal"
+ARG ONLOAD_DEBIAN_TAG="noble"
 
 FROM ${ONLOAD_DEBIAN_BASE}:${ONLOAD_DEBIAN_TAG}
 
 ARG ONLOAD_DEBIAN_BASE="ubuntu"
-ARG ONLOAD_DEBIAN_TAG="focal"
+ARG ONLOAD_DEBIAN_TAG="noble"
 
 # Onload version and its md5sum
 ARG ONLOAD_VERSION="7.1.3.202"
@@ -73,8 +73,8 @@ RUN \
         coreutils \
         curl \
         ethtool \
-        g++-10 \
-        gcc-10 \
+        g++ \
+        gcc \
         kmod \
         linux-libc-dev \
         libpcap0.8-dev \
@@ -83,7 +83,7 @@ RUN \
         net-tools \
         patch \
         perl \
-        python2-dev \
+        python3-dev \
         sed \
         tar \
         unzip \
@@ -91,12 +91,6 @@ RUN \
         valgrind \
         wget \
         libcap-dev \
-    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10 \
-    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10 \
-    && update-alternatives --install /usr/bin/cc cc /usr/bin/gcc 30 \
-    && update-alternatives --set cc /usr/bin/gcc \
-    && update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++ 30 \
-    && update-alternatives --set c++ /usr/bin/g++ \
     && cd /tmp \
     && if [ -n "${ONLOAD_PACKAGE_URL}" ] ; then \
           curl --insecure -fSL \
