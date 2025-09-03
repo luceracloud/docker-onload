@@ -56,6 +56,9 @@ ARG ONLOAD_DISABLE_SYSCALL_HOOK
 # thus one may need to spoof the userspace ID.
 ARG ONLOAD_USERSPACE_ID
 
+# We want to install latest base updates before running 
+RUN DEBIAN_FRONTEND=noninteractive apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+
 # 1) Install OpenOnload build dependencies
 # 2) Download and verify OpenOnload from Solarflare's site
 # 3) Extract, build, and install onload
@@ -90,12 +93,26 @@ RUN \
         libcap-dev \
     && cd /tmp \
     && if [ -n "${ONLOAD_PACKAGE_URL}" ] ; then \
-          curl --insecure -fSL "${ONLOAD_PACKAGE_URL}" -o /tmp/onload-${ONLOAD_VERSION}-package.zip \
+          curl --insecure -fSL \
+            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" \
+            -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" \
+            -H "Accept-Language: en-US,en;q=0.5" \
+            -H "Connection: keep-alive" \
+            -H "Upgrade-Insecure-Requests: 1" \
+            --compressed \
+            "${ONLOAD_PACKAGE_URL}" -o /tmp/onload-${ONLOAD_VERSION}-package.zip \
           && unzip /tmp/onload-${ONLOAD_VERSION}-package.zip \
           && echo "${ONLOAD_MD5SUM} onload-${ONLOAD_VERSION}.tgz" | md5sum --check \
           && tar -zxf onload-${ONLOAD_VERSION}.tgz ; \
     else \
-          curl --insecure -fSL "${ONLOAD_LEGACY_URL}" -o /tmp/onload-${ONLOAD_VERSION}.tgz \
+          curl --insecure -fSL \
+            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" \
+            -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" \
+            -H "Accept-Language: en-US,en;q=0.5" \
+            -H "Connection: keep-alive" \
+            -H "Upgrade-Insecure-Requests: 1" \
+            --compressed \
+            "${ONLOAD_LEGACY_URL}" -o /tmp/onload-${ONLOAD_VERSION}.tgz \
           && echo "${ONLOAD_MD5SUM} onload-${ONLOAD_VERSION}.tgz" | md5sum --check \
           && tar -zxf onload-${ONLOAD_VERSION}.tgz \
           && mv openonload-${ONLOAD_VERSION} onload-${ONLOAD_VERSION}; \
@@ -131,7 +148,3 @@ LABEL ONLOAD_MD5SUM="${ONLOAD_MD5SUM}"
 LABEL ONLOAD_WITHZF="${ONLOAD_WITHZF}"
 LABEL ONLOAD_DISABLE_SYSCALL_HOOK="${ONLOAD_DISABLE_SYSCALL_HOOK}"
 LABEL ONLOAD_USERSPACE_ID="${ONLOAD_USERSPACE_ID}"
-
-# Create a folder for core dumps
-RUN mkdir -p /var/crash/
-VOLUME /var/crash/

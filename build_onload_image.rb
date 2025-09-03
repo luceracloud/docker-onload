@@ -5,20 +5,15 @@
 require 'getoptlong'
 
 $ONLOAD_VERSIONS = {
+    '8.1.3.40'   => { :version => '8.1.3.40',   :md5sum => '2cf23e45999e4c411c32ea13e91bcc49', :driverid => 'tbc', :package_url => 'https://www.amd.com/content/dam/amd/en/support/downloads/solarflare/onload/openonload/8-1-3-40/SF-109585-LS-44-OpenOnload-Release-Package.zip' },
     '8.0.2.51'   => { :version => '8.0.2.51',   :md5sum => '6d13cfd3d68ad4f6b1f41fcb624f85cd', :driverid => '89ed1273b4d369806a6a03b8f3697c17', :package_url => 'https://www.xilinx.com/content/dam/xilinx/publications/solarflare/onload/openonload/8_0_2_51/SF-109585-LS-40-OpenOnload-Release-Package.zip' },
-    '7.1.3.202'   => { :version => '7.1.3.202',   :md5sum => '6153f93f03c65b4d091e9247c195b58c', :driverid => '1d52732765feca797791b9668b14fb4e', :package_url => 'https://www.xilinx.com/content/dam/xilinx/publications/solarflare/onload/openonload/7-1-3-202/SF-109585-LS-37-OpenOnload-release-package.zip' },
 }
-$ONLOAD_VERSIONS['latest'] = $ONLOAD_VERSIONS['8.0.2.51'].dup
+$ONLOAD_VERSIONS['latest'] = $ONLOAD_VERSIONS['8.1.3.40'].dup
 
 $IMAGE_FLAVORS = {
-    'bionic'   => { :flavor => 'bionic', :os => 'Ubuntu 18.04 LTS'},
-    'bullseye' => { :flavor => 'bullseye', :os => 'Debian 11' },
-    'buster'   => { :flavor => 'buster', :os => 'Debian 10' },
-    'centos7'  => { :flavor => 'centos7', :os => 'Centos 7'},
-    'centos8'  => { :flavor => 'centos8', :os => 'Centos 8' },
     'focal'    => { :flavor => 'focal' , :os => 'Ubuntu 20.04 LTS'},
     'jammy'    => { :flavor => 'jammy', :os => 'Ubuntu 22.04 LTS' },
-    'stretch'  => { :flavor => 'stretch', :os => 'Debian 9' }
+    'noble'    => { :flavor => 'noble', :os => 'Ubuntu 24.04 LTS' },
 }
 
 ###############################################################################
